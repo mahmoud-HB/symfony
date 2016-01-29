@@ -16,6 +16,9 @@
         <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/readable/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         
     </head>
     <body>
@@ -25,10 +28,35 @@
                 <div class="right-links">
                     <ul>
                         <li><a href="cart.html"><span class="ico-products"></span>3 products, $4 500.00</a></li>
-                        <li><a href="#"><span class="ico-account"></span>Account</a></li>
-                        <li><a href="#"><span class="ico-signout"></span>Sign out</a></li>
-                        <li><a href="{{ path('front_homepage', {'_locale': 'fr'}) }}"><img src="{{ asset('images/fr.jpg')}}" style="width : 40px" alt="fr"></a></li>
-                        <li style="padding-left : 0px!important"><a href="{{ path('front_homepage', {'_locale': 'en'}) }}"><img src="{{ asset('images/en.png')}}" style="width : 41px" alt="en"></a></li>
+                        <li><a href="{{ path('profile', { 'id': 2 }) }}"><span class="ico-account"></span>Account</a></li>
+                        <li>
+                            <ul>
+                                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Login<span class="ico-signout"></span></a>
+                                  <div class="dropdown-menu">
+                                    <form id="formLogin" class="form container-row">
+                                      <div class="form-group">
+                                        <label for="usr">Name:</label>
+                                        <input type="text" class="form-control" id="usr">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="pwd">Password:</label>
+                                        <input type="password" class="form-control" id="pwd">
+                                      </div>
+                                      <button type="button" id="btnLogin" class="btn btn-block">Login</button>
+                                    </form>
+                                    <div class="container-fluid">
+                                      <br>
+                                      <a class="small" href="#">Inscription</a>
+                                    </div>  
+                                  </div>
+                                </li>
+                            </ul>
+                      </li>
+
+
+                        {# <li><a href="{{ path('nouveau_profile')}}"><span class="ico-signout"></span>Sign in</a></li> #}
+                        <li><a href="{{ path('front_homepage', {'_locale': 'fr'}) }}"><img src="{{ asset('images/fr.jpg')}}" style="width : 35px" alt="fr"></a></li>
+                        <li style="padding-left : 0px!important"><a href="{{ path('front_homepage', {'_locale': 'en'}) }}"><img src="{{ asset('images/en.png')}}" style="width : 36px" alt="en"></a></li>
                     </ul>
                 </div>
             </div>
@@ -40,9 +68,7 @@
             <div class="container">
                 <div class="trigger"></div>
                 <ul>
-                    {% for category in categories %}
-                    <li><a href="{{ path('produits', { 'id': category.nom }) }}">{{ category.nom }}</a></li>
-                    {% endfor  %}
+                    {{ render(controller("FrontBundle:Default:menu")) }}
                 </ul>
             </div>
             <!-- / container -->

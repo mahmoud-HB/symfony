@@ -1,0 +1,10 @@
+layout.logged_in_as: __layout.logged_in_as
+layout.logout: __layout.logout
+layout.login: __layout.login
+security.login.username: __security.login.username
+security.login.password: __security.login.password
+security.login.remember_me: __security.login.remember_me
+security.login.submit: __security.login.submit
+profile.show.username: __profile.show.username
+profile.show.email: __profile.show.email
+profile.edit.submit: __profile.edit.submit

@@ -31,4 +31,15 @@ class CategoriesRepository extends \Doctrine\ORM\EntityRepository
 		  
 		return $q->getResult();
 	}
+
+	public function findByNom($local="fr"){
+		$q = $this->createQueryBuilder("c")
+			->select("c.nom")
+			->where("c.langue = :lg");
+
+		$q->setParameter("lg", $local); 
+		$q = $q->getQuery();
+		  
+		return $q->getResult();
+	}
 }

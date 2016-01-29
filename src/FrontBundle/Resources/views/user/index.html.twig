@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <h1>Users list</h1>
+
+    <div class="container">
+        <div class="table-responsive"> 
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Mail</th>
+                        <th>Active</th>
+                        <th>Role</th>
+                        <th>Adresse</th>
+                        <th>Ville</th>
+                        <th>Code Postale</th>
+                        <th>Pays</th>
+                        <th>Adressede facturation</th>
+                        <th>Ville</th>
+                        <th>Code Postale</th>
+                        <th>Pays</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{% if user.enabled == 1 %}Yes{% else %} No {% endif %}</td>
+                        <td>{{ user.roles.0 }}</td>
+                        {% for adresse in user.adresse %}
+                            <td>{{ adresse.adresse }}</td>
+                            <td>{{ adresse.ville }}</td>
+                            <td>{{ adresse.cp }}</td>
+                            <td>{{ adresse.country }}</td>
+                        {% endfor %}
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('user_show', { 'id': user.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% else %}
+<br><br><br>
+    <a class="btn btn-primary" href="{{ path('fos_user_registration_register') }}">Register</a>
+    <a class="btn btn-primary" href="{{ path('fos_user_security_login') }}">Connexion</a>
+<hr>
+{% endif %}    
+{% endblock %}

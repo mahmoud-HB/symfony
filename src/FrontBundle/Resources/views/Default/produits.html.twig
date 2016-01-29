@@ -68,11 +68,12 @@
 				<div id="content">
 					<section class="products">
 					{% for produit in categories %}
-						<article>
-							<a href="product.html"><img src="images/11.jpg" alt=""></a>
-							<h3><a href="#">{{ produit.nom }}</a></h3>
-							<h4><a href="#">$990.00</a></h4>
+						<article class="col-sm-4">
+							<a href="product.html"><img src="{{ asset('images/11.jpeg') }}" alt=""></a>
+							<h3><a href="{{ path('fiche_produit', { 'id': produit.traduction.0.nom }) }}">{{produit.traduction.0.nom}}</a></h3>
+							<h4><a href="{{ path('fiche_produit', { 'id': produit.traduction.0.nom }) }}">{{produit.prix}} €</a></h4>
 							<a href="#" class="btn-add">Add to cart</a>
+							
 							{# <a href="{{ path('produits', { 'id': category.nom }) }}">{{ category.nom }}</a> #}
 						</article>
 					{% endfor %}

@@ -15,15 +15,17 @@
         <div class="container">
             <div class="row">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <div class="col-sm-9">
+                <div class="col-sm-7">
                     <a href="{{ path('home_back') }}" class="btn btn-primary" >PRODUITS</a>
                     <a href="{{ path('user_index')}}" class="btn btn-primary"  >USERS</a>
                     <a href="{{ path('commandes_index') }}" class="btn btn-primary" >COMMANDES</a>
+                    
                 </div>
-                
+                <a href="{{ path('front_homepage') }}" class="btn btn-default" target=_blank>Voir le Site</a>
                  <div class="col-sm-3">
-                    <span class="label label-info">{{ 'Hello'|trans }} {{ app.user.username }}</span>
+                    <span class="label label-info">{{ 'Bonjour'|trans }} {{ app.user.username }}</span>
                     <a class="btn btn-danger" href="{{ path("fos_user_security_logout") }}" role="button">Deconnexion</a>
+
                 </div>
                 {% endif %}
             </div>

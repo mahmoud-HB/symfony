@@ -1,0 +1,68 @@
+{% extends 'FrontBundle::front.html.twig' %}
+{% block body %}
+
+	<div id="breadcrumbs">
+		<div class="container">
+			<ul>
+				<li><a href="{{ path('front_homepage') }}">Home</a></li>
+				<li>Product page</li>
+			</ul>
+		</div>
+		<!-- / container -->
+	</div>
+	<!-- / body -->
+
+	<div id="body">
+		<div class="container">
+			<div id="content" class="full">
+				<div class="product">
+					<div class="image">
+						<img src="{{ asset('images/00.jpg') }}" alt="">
+					</div>
+					<div class="details">
+						{% for product in produits %}
+						<h1>{{ product.traduction.0.nom }}</h1>
+						<h4>{{ product.prix }} €</h4>
+						<div class="entry">
+							<p>{{ product.traduction.0.description }}</p>
+							<div class="tabs">
+								<div class="nav">
+									<ul>
+										<li class="active"><a href="#desc">Description</a></li>
+										<li><a href="#spec">Specification</a></li>
+										<li><a href="#ret">Returns</a></li>
+									</ul>
+								</div>
+								<div class="tab-content active" id="desc">
+									<p>{{ product.traduction.0.description }}</p>
+								</div>
+								<div class="tab-content" id="spec">
+									<p>{{ product.traduction.0.description }}</p>
+								</div>
+								<div class="tab-content" id="ret">
+									<p>{{ product.traduction.0.description }}</p>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+						
+						<div class="actions">
+							{% for product in produits %}
+							<label>Quantity:</label>
+								
+									<select>{% for i in 0..product.stock %}<option>{{ i }}</option>{% endfor %}</select>
+								
+							<a href="#" class="btn-grey">Add to cart</a>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- / content -->
+		</div>
+		<!-- / container -->
+	</div>
+	<!-- / body -->
+
+
+{% endblock %}

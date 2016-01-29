@@ -24,15 +24,33 @@ class ProduitsRepository extends \Doctrine\ORM\EntityRepository
 		return $q->getResult();
 	}
 
-		public function FindByCategorie($local="fr", $id){
+	public function FindByCategorie($local="fr", $id){
 		$q = $this->createQueryBuilder("p")
 		  ->leftJoin("p.traduction", "t")->addSelect("t")
 		  ->leftJoin("t.categorie", "c")->addSelect("c")
-		  ->leftJoin("t.type", "ty")->addSelect("ty");
+		  ->leftJoin("t.type", "ty")->addSelect("ty")
 
-		$q->where("c.id = :id")->setParameter("id", $id)
-		  ->andWhere("t.langue = :lg")->setParameter("lg", $local);
+		  ->where("c.nom = :id")
+		  ->setParameters(array(		  		
+		  		"id" => $id
+		  		));
 
 		return $q->getQuery()->getResult();
+
+		/*$q->where("c.id = :id")->setParameter("id", $id)
+		  ->andWhere("t.langue = :lg")->setParameter("lg", $local);*/
+	}
+
+	public function FindByNom($local="fr", $id){
+		$q = $this->createQueryBuilder("p")
+			->leftJoin("p.traduction", "t")->addSelect("t")
+			->leftJoin("t.categorie", "c")->addSelect("c")
+		  	->leftJoin("t.type", "ty")->addSelect("ty")
+			->where("t.nom = :id");
+
+		$q->setParameter("id", $id); 
+		$q = $q->getQuery();
+		  
+		return $q->getResult();
 	}
 }

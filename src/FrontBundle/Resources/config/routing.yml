@@ -7,3 +7,19 @@ front_homepage:
 produits:
     path:     /{_locale}/produits/{id}
     defaults: { _controller: FrontBundle:Default:produits }
+
+fiche_produit:
+    path:     /{_locale}/fiche_produit/{id}
+    defaults: { _controller: FrontBundle:Default:fiche }
+
+profile:
+    path:     /{_locale}/profile/{id}
+    defaults: { _controller: FrontBundle:User:show }
+
+nouveau_profile:
+    path:     /{_locale}/nouveau
+    defaults: { _controller: FrontBundle:User:new }
+
+edit_profile:
+    path:     /{_locale}/modifier/{id}
+    defaults: { _controller: FrontBundle:User:edit }
