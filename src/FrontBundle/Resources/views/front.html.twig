@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Diana’s jewelry{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+        <link rel="stylesheet" media="all" href="{{ asset('css/style.css')}}">
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/readable/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        
+    </head>
+    <body>
+        <header id="header">
+            <div class="container">
+                <a href="{{ path('front_homepage') }}" id="logo" title="Diana’s jewelry">Diana’s jewelry</a>
+                <div class="right-links">
+                    <ul>
+                        <li><a href="cart.html"><span class="ico-products"></span>3 products, $4 500.00</a></li>
+                        <li><a href="#"><span class="ico-account"></span>Account</a></li>
+                        <li><a href="#"><span class="ico-signout"></span>Sign out</a></li>
+                        <li><a href="{{ path('front_homepage', {'_locale': 'fr'}) }}"><img src="{{ asset('images/fr.jpg')}}" style="width : 40px" alt="fr"></a></li>
+                        <li style="padding-left : 0px!important"><a href="{{ path('front_homepage', {'_locale': 'en'}) }}"><img src="{{ asset('images/en.png')}}" style="width : 41px" alt="en"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- / container -->
+        </header>      
+            <!-- / header -->
+
+        <nav id="menu">
+            <div class="container">
+                <div class="trigger"></div>
+                <ul>
+                    {% for category in categories %}
+                    <li><a href="{{ path('produits', { 'id': category.nom }) }}">{{ category.nom }}</a></li>
+                    {% endfor  %}
+                </ul>
+            </div>
+            <!-- / container -->
+        </nav>
+        <center>
+            {% block body %}{% endblock %}
+                <footer id="footer">
+                    <div class="container">
+                        <div class="cols">
+                            <div class="col">
+                                <h3>Frequently Asked Questions</h3>
+                                <ul>
+                                    <li><a href="#">Fusce eget dolor adipiscing </a></li>
+                                    <li><a href="#">Posuere nisl eu venenatis gravida</a></li>
+                                    <li><a href="#">Morbi dictum ligula mattis</a></li>
+                                    <li><a href="#">Etiam diam vel dolor luctus dapibus</a></li>
+                                    <li><a href="#">Vestibulum ultrices magna </a></li>
+                                </ul>
+                            </div>
+                            <div class="col media">
+                                <h3>Social media</h3>
+                                <ul class="social">
+                                    <li><a href="#"><span class="ico ico-fb"></span>Facebook</a></li>
+                                    <li><a href="#"><span class="ico ico-tw"></span>Twitter</a></li>
+                                    <li><a href="#"><span class="ico ico-gp"></span>Google+</a></li>
+                                    <li><a href="#"><span class="ico ico-pi"></span>Pinterest</a></li>
+                                </ul>
+                            </div>
+                            <div class="col contact">
+                                <h3>Contact us</h3>
+                                <p>Diana’s Jewelry INC.<br>54233 Avenue Street<br>New York</p>
+                                <p><span class="ico ico-em"></span><a href="#">contact@dianasjewelry.com</a></p>
+                                <p><span class="ico ico-ph"></span>(590) 423 446 924</p>
+                            </div>
+                            <div class="col newsletter">
+                                <h3>Join our newsletter</h3>
+                                <p>Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium.</p>
+                                <form action="#">
+                                    <input type="text" placeholder="Your email address...">
+                                    <button type="submit"></button>
+                                </form>
+                            </div>
+                        </div>
+                        <p class="copy">Copyright 2013 Jewelry. All rights reserved.</p>
+                    </div>
+                    <!-- / container -->
+                </footer>
+                <!-- / footer -->
+            {% block javascripts %}{% endblock %}
+                <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+                <script>window.jQuery || document.write("<script src='js/jquery-1.11.1.min.js'>\x3C/script>")</script>
+                <script src="{{ asset('js/plugins.js ')}}"></script>
+                <script src="{{ asset('js/main.js ')}}"></script>
+            
+        </center>
+    </body>
+</html>

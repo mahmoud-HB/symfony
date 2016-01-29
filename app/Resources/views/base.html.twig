@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome To My Shop!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/readable/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <br>
+        <div class="container">
+            <div class="row">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="col-sm-9">
+                    <a href="{{ path('home_back') }}" class="btn btn-primary" >PRODUITS</a>
+                    <a href="{{ path('user_index')}}" class="btn btn-primary"  >USERS</a>
+                    <a href="{{ path('commandes_index') }}" class="btn btn-primary" >COMMANDES</a>
+                </div>
+                
+                 <div class="col-sm-3">
+                    <span class="label label-info">{{ 'Hello'|trans }} {{ app.user.username }}</span>
+                    <a class="btn btn-danger" href="{{ path("fos_user_security_logout") }}" role="button">Deconnexion</a>
+                </div>
+                {% endif %}
+            </div>
+            <hr>
+        </div>          
+        <center>
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </center>
+    </body>
+</html>

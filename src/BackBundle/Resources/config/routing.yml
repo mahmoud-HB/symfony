@@ -1,0 +1,9 @@
+home_back:
+    path: /{_locale}
+    defaults: {_controller: BackBundle:Produits:index, _locale : fr}
+    requirements:
+        _locale : fr|en
+
+back_produits:
+        resource: "@BackBundle/Resources/config/routing/produits.yml"
+        prefix:   /

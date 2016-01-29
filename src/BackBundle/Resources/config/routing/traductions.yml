@@ -1,0 +1,24 @@
+traductions_index:
+    path:     /
+    defaults: { _controller: "BackBundle:Traductions:index" }
+    methods:  GET
+
+traductions_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackBundle:Traductions:show" }
+    methods:  GET
+
+traductions_new:
+    path:     /new
+    defaults: { _controller: "BackBundle:Traductions:new" }
+    methods:  [GET, POST]
+
+traductions_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackBundle:Traductions:edit" }
+    methods:  [GET, POST]
+
+traductions_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackBundle:Traductions:delete" }
+    methods:  DELETE

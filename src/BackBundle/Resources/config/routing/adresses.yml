@@ -1,0 +1,24 @@
+adresses_index:
+    path:     /
+    defaults: { _controller: "BackBundle:Adresses:index" }
+    methods:  GET
+
+adresses_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackBundle:Adresses:show" }
+    methods:  GET
+
+adresses_new:
+    path:     /new
+    defaults: { _controller: "BackBundle:Adresses:new" }
+    methods:  [GET, POST]
+
+adresses_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackBundle:Adresses:edit" }
+    methods:  [GET, POST]
+
+adresses_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackBundle:Adresses:delete" }
+    methods:  DELETE

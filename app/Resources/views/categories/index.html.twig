@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block fil_ariane %}
+        <ol class="breadcrumb record_actions">
+            <li><a href="{{ path('produits_index') }}">Liste des produits</a></li>
+            <li class="active"><em>Listes catégories</em></li>
+        </ol>
+    {% endblock fil_ariane %}
+    <h1>Categories list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Langue</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td><a href="{{ path('categories_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
+                <td>{{ category.nom }}</td>
+                <td>{{ category.langue }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categories_show', { 'id': category.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categories_edit', { 'id': category.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categories_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

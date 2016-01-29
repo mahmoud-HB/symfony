@@ -1,0 +1,34 @@
+back_categories:
+    resource: "@BackBundle/Controller/CategoriesController.php"
+    type:     annotation
+
+back_produits:
+    resource: "@BackBundle/Controller/ProduitsController.php"
+    type:     annotation
+
+back:
+    resource: "@BackBundle/Resources/config/routing.yml"
+    prefix:   /
+
+front:
+    resource: "@FrontBundle/Resources/config/routing.yml"
+    prefix:   /front
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+back_adresses:
+    resource: "@BackBundle/Resources/config/routing/adresses.yml"
+    prefix:   /adresses
+
+back_commandes:
+    resource: "@BackBundle/Resources/config/routing/commandes.yml"
+    prefix:   /commandes
+
+back_types:
+    resource: "@BackBundle/Resources/config/routing/types.yml"
+    prefix:   /types
+
+back_user:
+    resource: "@BackBundle/Resources/config/routing/user.yml"
+    prefix:   /user

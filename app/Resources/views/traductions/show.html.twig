@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Traductions</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ traduction.id }}</td>
+            </tr>
+            <tr>
+                <th>Langue</th>
+                <td>{{ traduction.langue }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ traduction.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ traduction.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('traductions_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('traductions_edit', { 'id': traduction.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

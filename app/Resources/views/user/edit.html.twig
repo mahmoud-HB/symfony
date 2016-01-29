@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+        
+    <div class="container">
+        {{ form_start(edit_form) }}
+        <h1>Users Edit</h1>        
+               
+            {{ form_row(edit_form.username) }}
+            {{ form_row(edit_form.email) }}
+            {{ form_row(edit_form.enabled) }}
+            {{ form_row(edit_form.roles) }}
+        
+        
+            <ul class="tags" data-prototype="{{ form_widget(edit_form.adresse.vars.prototype)|e }} ">
+                {# iterate over each existing tag and render its only field: name #}
+                    <li class="well">{{ form_row(edit_form.adresse) }}</li>
+            </ul>
+          
+        
+            <input type="submit" value="Edit" />
+        {{ form_end(edit_form) }}
+      
+    </div>
+
+    <ul>
+        <li>
+            <a href="{{ path('user_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block javascripts %}
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+        
+        var $collectionHolder;
+        
+        var $addTagLink = $('<a href="#" class="add_tag_link">Ajouter une adresse</a>');
+
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+
+        
+        jQuery(document).ready(function () {
+
+            $collectionHolder = $('ul.tags');
+
+            $collectionHolder.append($newLinkLi);
+
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addTagLink.on('click', function (e) {
+
+                e.preventDefault();
+
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+
+            function addTagForm($collectionHolder, $newLinkLi) {
+
+                var prototype = $collectionHolder.data('prototype');
+
+                var index = $collectionHolder.data('index');
+
+                var newForm = prototype.replace(/__name__/g, index);
+
+                $collectionHolder.data('index', index + 1);
+
+                var $newFormLi = $('<li class="well"></li>').append(newForm);
+                $newLinkLi.before($newFormLi);
+            }
+        });
+    </script>
+{% endblock %}

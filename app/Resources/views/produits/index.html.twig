@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <center>
+    <br>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    
+    <a href="{{ path('home_back', {'_locale': 'fr'}) }}">FR</a>
+    <a href="{{ path('home_back', {'_locale': 'en'}) }}">EN</a>
+    <hr>
+    <center>
+        <a href="{{ path('types_index') }}" class="btn btn-success" >Type</a>
+        <a href="{{ path('categories_index')}}"class="btn btn-success"  >Categorie</a>
+    </center>
+    <hr>
+    <h1>Produits list</h1>
+    <div class="container">
+        <ul>
+             <li><a href="{{ path('produits_new') }}" >Ajouter un Produit</a></li>
+        </ul>
+        <div class="table-responsive"> 
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>  Actif  </th>
+                        <th>  Langue  </th>
+                        <th>  Stock  </th>
+                        <th>  Nom  </th>
+                        <th>  Descriptions  </th>
+                        <th>  prix  </th>
+                        <th>  Categorie  </th>
+                        <th>  Type  </th>
+                        <th>  Datecreation  </th>
+                        <th>  Dateupdate  </th>
+                        <th>  Actions  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for produit in produits %}
+                    <tr>
+                        <td>{% if produit.actif %}Yes{% else %}No{% endif %}</td>
+                        <td>{%for produits in produit.traduction%} {{ produits.langue }}{% endfor %}</td>
+                        <td>{{ produit.stock }}</td>
+                        <td>{%for produits in produit.traduction%} {{ produits.Nom }}{% endfor %}</td>
+                        <td>{%for produits in produit.traduction%} {{ produits.Description }}{% endfor %}</td>
+                        <td>{{ produit.prix }}</td>                      
+                        <td>{{ produit.traduction.0.categorie.nom }}</td>   
+                        <td>{%for produits in produit.traduction%} 
+                                {%for traductions in produits.type%} 
+                                    {{ traductions.nom }}
+                                {% endfor %}
+                            {% endfor %}
+                        </td>
+                        <td>{% if produit.datecreation %}{{ produit.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if produit.dateupdate %}{{ produit.dateupdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('produits_show', { 'id': produit.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('produits_edit', { 'id': produit.id }) }}">edit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% else %}
+    <br><br><br>
+        <a class="btn btn-primary" href="{{ path('fos_user_registration_register') }}">Register</a>
+        <a class="btn btn-primary" href="{{ path('fos_user_security_login') }}">Connexion</a>
+    <hr>
+    {% endif %}    
+    </center>
+{% endblock %}

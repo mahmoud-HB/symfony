@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <h1>Commandes list</h1>
+    
+    {#
+    <ul>
+        <li>
+            <a href="{{ path('commandes_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+    #}
+    <div class="container">
+    <div class="row">
+        <div class="table-responsive well"> 
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Total</th>
+                        <th>Dateprisecommande</th>
+                        <th>Validate</th>
+                        <th>Send</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for commande in commandes %}
+                    <tr>
+                        <td>{{ commande.total }}</td>
+                        <td>{% if commande.dateprisecommande %}{{ commande.dateprisecommande|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if commande.validate %}Yes{% else %}No{% endif %}</td>
+                        <td>{% if commande.send %}{{ commande.send|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('commandes_edit', { 'id': commande.id }) }}">show</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+{% else %}
+<br><br><br>
+    <a class="btn btn-primary" href="{{ path('fos_user_registration_register') }}">Register</a>
+    <a class="btn btn-primary" href="{{ path('fos_user_security_login') }}">Connexion</a>
+<hr>
+{% endif %}         
+{% endblock %}

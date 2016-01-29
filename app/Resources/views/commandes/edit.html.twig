@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Commandes</h1>
+    <ul>
+        {{ form(edit_form) }}
+            {{ form_row(edit_form.validate) }}
+        {{ form_end(edit_form) }}
+       
+        <li>
+            <a href="{{ path('commandes_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    <div class="container">
+        <div class="row">
+        
+            <div class="table-responsive well"> 
+            <h2>Informations sur la commande</h2>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th>Total</th>
+                            <td>{{ commande.total }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dateprisecommande</th>
+                            <td>{% if commande.dateprisecommande %}{{ commande.dateprisecommande|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>Validate</th>
+                            <td>{% if commande.validate %}Yes{% else %}No{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>Send</th>
+                            <td>{% if commande.send %}{{ commande.send|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive well"> 
+            <h2>Informations sur les produits</h2>
+                
+                    {% for produits in commande.panier%}
+                    <div class="table-responsive well col-sm-6"> 
+                    <table class="table table-hover">
+                    <h3>Produit {{produits.id}}</h3>
+                    
+                        <tbody>
+                            <tr>
+                                <th>Prix</th>
+                                <td>{{ produits.produit.prix }}</td>
+                            </tr>
+                        {% for trad in produits.produit.traduction%}
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ trad.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th>description</th>
+                                <td>{{ trad.description }}</td>
+                            </tr>
+                             <tr>
+                                <th>categorie</th>
+                                <td>{{ trad.categorie.nom }}</td>
+                            </tr>
+                            {% for type in trad.type%}
+                            <tr>
+                                <th>type</th>
+                                <td>{{ type.nom }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endfor %}
+                   
+                        </tbody>
+                    </table>
+                 
+                </div>
+                {% endfor %}
+            </div>
+            <div class="table-responsive well"> 
+            <h2>Informations sur le client</h2>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th>nom</th>
+                            <td>{{ commande.user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>email</th>
+                            <td>{{ commande.user.email }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                    {% for adresses in commande.user.adresse %}
+                    <div class="table-responsive well col-sm-6">
+                    <table class="table table-hover">
+                    <tbody>
+                    <h3>Adresse {{ adresses.type }}</h3>
+                        <tr>
+                            <th>adresse</th>
+                            <td>{{ adresses.adresse }}</td>
+                        </tr>
+                        <tr>
+                            <th>ville</th>
+                            <td>{{ adresses.ville }}</td>
+                        </tr>
+                        <tr>
+                            <th>cp</th>
+                            <td>{{ adresses.cp }}</td>
+                        </tr>
+                        <tr>
+                            <th>pays</th>
+                            <td>{{ adresses.country }}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </div>
+                    {% endfor %}
+
+                 
+                    
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

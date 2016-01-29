@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <center>
+    <br>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h1>{{ 'Produits'|trans }}</h1>
+
+        <div class="container">
+        <div class="table-responsive"> 
+        <table class="table table-hover">
+            <tbody>
+                   
+                <tr>
+                    <th>Nom</th>
+                    <td>{%for produits in produit.traduction%} {{ produits.Nom }}{% endfor %}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{%for produits in produit.traduction%} {{ produits.Description }}{% endfor %}</td>
+                </tr>
+                <tr>
+                    <th>Catégorie</th>
+                    <td>{{ produit.traduction.0.categorie.nom }}</td> 
+                </tr>
+                <tr>
+                    <th>Types</th>
+                    <td>
+                    {%for produits in produit.traduction%} 
+                        {%for traductions in produits.type%} 
+                            {{ traductions.nom }}
+                        {% endfor %}
+                    {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Actif</th>
+                    <td>{% if produit.actif %}Yes{% else %}No{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ produit.prix }}</td>
+                </tr>
+                <tr>
+                    <th>Stock</th>
+                    <td>{{ produit.stock }}</td>
+                </tr>
+                <tr>
+                    <th>Datecreation</th>
+                    <td>{% if produit.datecreation %}{{ produit.datecreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Dateupdate</th>
+                    <td>{% if produit.dateupdate %}{{ produit.dateupdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <ul>
+            <li>
+                <a href="{{ path('produits_index') }}">Back to the list</a>
+            </li>
+            <li>
+                <a href="{{ path('produits_edit', { 'id': produit.id }) }}">Edit</a>
+            </li>
+        </ul>
+        </div>
+         {% else %}
+        <br><br><br>
+            <a class="btn btn-primary" href="{{ path('fos_user_registration_register') }}">Register</a>
+            <a class="btn btn-primary" href="{{ path('fos_user_security_login') }}">Connexion</a>
+        <hr>
+    {% endif %}    
+    </center>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Traductions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Langue</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for traduction in traductions %}
+            <tr>
+                <td><a href="{{ path('traductions_show', { 'id': traduction.id }) }}">{{ traduction.id }}</a></td>
+                <td>{{ traduction.langue }}</td>
+                <td>{{ traduction.nom }}</td>
+                <td>{{ traduction.description }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('traductions_show', { 'id': traduction.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('traductions_edit', { 'id': traduction.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('traductions_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

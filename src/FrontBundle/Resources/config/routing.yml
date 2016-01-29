@@ -1,0 +1,9 @@
+front_homepage:
+    path:     /{_locale}
+    defaults: { _controller: FrontBundle:Default:index, _locale : fr}
+    requirements:
+        _locale : fr|en
+
+produits:
+    path:     /{_locale}/produits/{id}
+    defaults: { _controller: FrontBundle:Default:produits }

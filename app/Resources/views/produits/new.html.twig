@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <center>
+    <br>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h1>Produits creation</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {# form_row(form.brochure) #}
+            <input type="submit" value="Create" />
+        {{ form_end(form) }}
+
+        <ul>
+            <li>
+                <a href="{{ path('produits_index') }}">Back to the list</a>
+            </li>
+        </ul>
+    {% else %}
+        <br><br><br>
+            <a class="btn btn-primary" href="{{ path('fos_user_registration_register') }}">Register</a>
+            <a class="btn btn-primary" href="{{ path('fos_user_security_login') }}">Connexion</a>
+        <hr>
+    {% endif %}    
+    </center>
+{% endblock %}

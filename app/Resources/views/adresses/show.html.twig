@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Adresses</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ adress.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ adress.type }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ adress.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ adress.ville }}</td>
+            </tr>
+            <tr>
+                <th>Cp</th>
+                <td>{{ adress.cp }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ adress.country }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('adresses_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('adresses_edit', { 'id': adress.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

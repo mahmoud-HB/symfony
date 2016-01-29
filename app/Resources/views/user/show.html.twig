@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block fil_ariane %}
+        <ol class="breadcrumb record_actions">
+            <li><a href="{{ path('user_index') }}">Liste des users</a></li>
+            <li class="active"><em>User : {{ user.username }}</em></li>
+        </ol>
+    {% endblock fil_ariane %}
+
+    {% for message in app.session.flashbag.get("info") %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h1>Users</h1>
+    <ul>
+        <li>
+            <a href="{{ path('user_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
+        </li>
+    </ul>
+    <div class="container">
+        <div class="row">
+        
+            <div class="table-responsive well"> 
+                <table class="table table-hover">
+                    <tbody>
+                    <h3>Informations de {{ user.username }}</h3>
+                        <tr>
+                            <th>Nom: </th>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Mail: </th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                        <th>Active</th>
+                            <td>{% if user.enabled == 1 %}Yes{% else %} No {% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>Role</th>
+                            <td>{{ user.roles.0 }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>    
+            {% for adresse in user.adresse %}
+            <div class="table-responsive well col-sm-4"> 
+                <table class="table table-hover">
+                
+                    <h3>Adresse {{ adresse.type }}</h3>
+                
+                    <tbody>
+                        <tr>
+                            <th>Adresse</th>
+                            <td>{{ adresse.adresse }}</td>
+                        </tr>
+                        <tr>
+                            <th>Ville</th>
+                            <td>{{ adresse.ville }}</td>
+                        </tr>
+                        <tr>
+                            <th>Code Postale</th>
+                            <td>{{ adresse.cp }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pays</th>
+                            <td>{{ adresse.country }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+                    
+            </div>
+        </div>
+    </div>        
+
+{% endblock %}
